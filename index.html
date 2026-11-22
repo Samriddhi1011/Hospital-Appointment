@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hospital Care | Book Doctor Appointments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="#" class="logo">
+        <span class="logo-mark">+</span>
+        <span>Hospital Care</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#doctors">Doctors</a>
+        <a href="#book">Book Appointment</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn" title="Switch Theme" aria-label="Switch Theme">
+          <span id="themeIcon">🌙</span>
+        </button>
+        <button id="openDrawerBtn" class="btn-outline">
+          My Bookings <span id="bookingCount" class="badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="pill">Trusted Healthcare • Mon – Sat, 9 AM – 8 PM</span>
+        <h1>Thoughtful medical care, booked in seconds.</h1>
+        <p>
+          Skip the waiting room queue. Browse our experienced specialists, check transparent consultation fees, and reserve your preferred time slot online.
+        </p>
+        <div class="hero-buttons">
+          <a href="#book" class="btn-primary">Book an Appointment</a>
+          <a href="#doctors" class="btn-secondary">Meet Our Doctors</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Clinic Highlights</h3>
+        <ul class="highlight-list">
+          <li>
+            <strong>15+ Years</strong>
+            <span>Experienced medical specialists</span>
+          </li>
+          <li>
+            <strong>Zero Wait Time</strong>
+            <span>Confirmed slot-based consultations</span>
+          </li>
+          <li>
+            <strong>Transparent Fees</strong>
+            <span>Upfront pricing with no hidden charges</span>
+          </li>
+          <li>
+            <strong>Emergency Helpline</strong>
+            <span>Call 112 or +91 11111 11111</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Available Services</h2>
+        <p>Select a department to view details or directly book a consultation.</p>
+      </div>
+
+      <div id="servicesGrid" class="grid-3"></div>
+    </div>
+  </section>
+
+  <section id="doctors" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Specialists</h2>
+        <p>Filter by department and choose the right doctor for your needs.</p>
+      </div>
+
+      <div id="filterBar" class="filter-bar">
+        <button class="filter-btn active" data-dept="All">All</button>
+        <button class="filter-btn" data-dept="General Physician">General Physician</button>
+        <button class="filter-btn" data-dept="Cardiologist">Cardiologist</button>
+        <button class="filter-btn" data-dept="Dermatologist">Dermatologist</button>
+        <button class="filter-btn" data-dept="Pediatrician">Pediatrician</button>
+        <button class="filter-btn" data-dept="Dentist">Dentist</button>
+      </div>
+
+      <div id="doctorsGrid" class="grid-3"></div>
+    </div>
+  </section>
+
+  <section id="book" class="section">
+    <div class="container booking-wrapper">
+      <div class="booking-info">
+        <h2>Book Your Visit</h2>
+        <p>
+          Fill out your details, pick a convenient date and time slot, and receive instant confirmation.
+        </p>
+
+        <div class="clinic-box">
+          <h4>Clinic Address</h4>
+          <p>Near Clock Tower, Dehradun, Uttarakhand</p>
+          <h4>Consultation Hours</h4>
+          <p>Monday – Saturday: 09:00 AM – 08:00 PM</p>
+        </div>
+      </div>
+
+      <form id="appointmentForm" class="booking-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="patientName">Patient Full Name *</label>
+            <input type="text" id="patientName" placeholder="e.g. Aarav Sharma" required />
+            <small class="error-msg" id="nameError"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="patientPhone">Mobile Number (10 digits) *</label>
+            <input type="tel" id="patientPhone" maxlength="10" placeholder="e.g. 9876543210" required />
+            <small class="error-msg" id="phoneError"></small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="serviceSelect">Department / Service *</label>
+            <select id="serviceSelect" required>
+              <option value="">-- Choose Service --</option>
+            </select>
+            <small class="error-msg" id="serviceError"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="doctorSelect">Select Doctor *</label>
+            <select id="doctorSelect" required>
+              <option value="">-- Choose Doctor --</option>
+            </select>
+            <small class="error-msg" id="doctorError"></small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="appointmentDate">Preferred Date *</label>
+          <input type="date" id="appointmentDate" required />
+          <small class="error-msg" id="dateError"></small>
+        </div>
+
+        <div class="form-group">
+          <label>Select Time Slot *</label>
+          <div id="slotContainer" class="slot-grid"></div>
+          <small class="error-msg" id="slotError"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Symptoms or Notes </label>
+          <textarea id="notes" rows="2" placeholder="Briefly describe your symptoms..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary full-width">Confirm Appointment</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>For urgent medical help, dial <strong>112</strong></p>
+    </div>
+  </footer>
+
+  <div id="drawerOverlay" class="overlay hidden"></div>
+  <aside id="bookingsDrawer" class="drawer">
+    <div class="drawer-header">
+      <h3>My Appointments</h3>
+      <button id="closeDrawerBtn" class="icon-btn" aria-label="Close Drawer">✕</button>
+    </div>
+    <div id="bookingsList" class="drawer-body"></div>
+  </aside>
+
+  <div id="confirmModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="check-circle">✓</div>
+      <h3>Appointment Confirmed!</h3>
+      <p id="modalSummary"></p>
+      <button id="closeModalBtn" class="btn-primary full-width">Done</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
